@@ -7,11 +7,23 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,10 +40,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             JetCompose101Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "workbeattalent",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    StateAround(pad = innerPadding)
                 }
             }
         }
@@ -39,37 +48,56 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun StateAround(pad: PaddingValues) {
+    var count by remember {
+        mutableIntStateOf(0)
+    }
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier
+            .background(color = Color.White)
+            .fillMaxSize()
+            .padding(pad)
     ) {
         Text(
-            text = name,
-            modifier = modifier
-                .background(color = Color.Black)
-                .padding(15.dp),
-            fontWeight = FontWeight.Bold,
-            fontSize = 42.sp,
-            color = Color.White
-        )
-        Text(
-            text = "Software Engineering",
+            text = count.toString(),
+            modifier = Modifier.padding(4.dp),
             fontSize = 24.sp,
-            fontWeight = FontWeight(300),
-            modifier = Modifier.padding(horizontal = 16.dp)
+            fontWeight = FontWeight.Black,
         )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.padding(4.dp)
+        ) {
+            Button(onClick = { count++ }, modifier = Modifier.offset(x = (-4).dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowUp,
+                        contentDescription = null,
+                        tint = Color.White
+                    )
+                    Text(text = "Increment", color = Color.White)
+                }
+            }
+            Button(onClick = { count-- }) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowDown,
+                        contentDescription = null,
+                        tint = Color.White
+                    )
+                    Text(text = "Decrement", color = Color.White)
+                }
+            }
+        }
 
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    JetCompose101Theme {
-        Greeting("workbeattalent")
-    }
+@Preview
+fun Prev() {
+    StateAround(pad = PaddingValues(4.dp))
 }

@@ -17,3 +17,4 @@ Get hands on android jetpack compose application development approach.
 - Row
 - Modifier properties
 - Lazy list
+- State data
