@@ -13,4 +13,7 @@ Get hands on android jetpack compose application development approach.
 - Modifier properties
 - Image
 - Text
-- 
+- Column
+- Row
+- Modifier properties
+- Lazy list
