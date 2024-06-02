@@ -9,4 +9,8 @@ Get hands on android jetpack compose application development approach.
 ## Topics
 
 - Compose function
+- Layout components - Column, Row, Box
+- Modifier properties
+- Image
+- Text
 - 
